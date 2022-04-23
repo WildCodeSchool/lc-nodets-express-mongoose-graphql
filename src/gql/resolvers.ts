@@ -1,3 +1,5 @@
+import Wilders from "../controllers/Wilders";
+import WilderModel from "../models/Wilder";
 
 const wilders = [
     {
@@ -16,6 +18,8 @@ const wilders = [
 // schema. This resolver retrieves all wilder from the "wilders" array above.
 export const resolvers = {
     Query: {
-        getAllWilders: () => wilders,
+         getAllWilders: async () => {
+            return await WilderModel.find;
+        },
     },
 };
