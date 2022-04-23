@@ -1,0 +1,21 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Wilder {
+  id        Int     @id @default(autoincrement())
+  name     String
+  city      String
+  skills   Skill[]
+}
+
+model Skill {
+  id    Int     @id @default(autoincrement())
+  votes Int   @default(0)
+  title  String
+}
