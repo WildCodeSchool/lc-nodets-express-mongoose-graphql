@@ -7,7 +7,7 @@ import {gql} from "apollo-server-express";
 export const typeDefs = gql`
     # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
     type Skill {
-        votes: Int
+        votes: String
         title: String
     }
     # This "Wilder" type defines the queryable fields for every wilder in our data source.

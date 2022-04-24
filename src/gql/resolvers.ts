@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client'
 
 const wilders = [
     {
@@ -16,6 +17,9 @@ const wilders = [
 // schema. This resolver retrieves all wilder from the "wilders" array above.
 export const resolvers = {
     Query: {
-        getAllWilders: () => wilders,
+        getAllWilders: async () => {
+            const prisma = new PrismaClient();
+            await prisma.wilder.findMany();
+        },
     },
 };
