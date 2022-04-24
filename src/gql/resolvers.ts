@@ -1,4 +1,8 @@
 
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 const wilders = [
     {
         name: 'Kate Chopin',
@@ -16,6 +20,12 @@ const wilders = [
 // schema. This resolver retrieves all wilder from the "wilders" array above.
 export const resolvers = {
     Query: {
-        getAllWilders: () => wilders,
+        getAllWilders: async () => {
+            const allWilders = await prisma.wilder.findMany();
+            console.log('allWilders', allWilders);
+            // use `console.dir` to print nested objects
+            console.dir(allWilders, { depth: null });
+            return allWilders;
+        },
     },
 };

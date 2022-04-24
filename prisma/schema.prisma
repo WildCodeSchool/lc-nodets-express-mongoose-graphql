@@ -1,27 +1,29 @@
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
 generator typegraphql {
-  provider = "typegraphql-prisma"
+  provider           = "typegraphql-prisma"
+  output             = "../prisma/generated/type-graphql"
+  emitTranspiledCode = "true"
 }
 
-model Skill {
-  id       Int     @id @default(autoincrement())
-  votes    Int     @default(0)
-  title    String
-  Wilder   Wilder? @relation(fields: [wilderId], references: [id])
-  wilderId Int?
+datasource db {
+  provider = "sqlite"
+  url      = "file:wilderDatabase.db"
 }
 
 model Wilder {
-  id     Int     @id @default(autoincrement())
-  name   String
-  city   String
-  skills Skill[]
+  id     Int      @id
+  name   String?
+  city   String?
+  Skills Skills[]
+}
+
+model Skills {
+  id       Int     @id
+  votes    String?
+  title    String?
+  wilderId Int
+  Wilder   Wilder  @relation(fields: [wilderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
